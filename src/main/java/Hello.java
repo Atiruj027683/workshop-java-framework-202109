@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class Hello {
+public class Hello {
+    public String sayHi(String name) {
+        return "Hello, "+ name;
+    }
 }
