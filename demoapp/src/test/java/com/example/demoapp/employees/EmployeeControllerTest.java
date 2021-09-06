@@ -3,25 +3,34 @@ package com.example.demoapp.employees;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class EmployeeControllerTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class EmployeeControllerTest {
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    TestRestTemplate testRestTemplate;
 
     @Test
-    public void listEmployee() {
+    void listEmployee() {
         // Act
-        EmployeeResponse[] results
-                = restTemplate.getForObject("/employees", EmployeeResponse[].class);
+        EmployeeResponse[] results = testRestTemplate.getForObject("/employees", EmployeeResponse[].class);
         // Assert
         assertEquals(2, results.length);
         assertEquals(1, results[0].getId());
-        assertEquals("somkiat", results[0].getName());
+        assertEquals("Nattawat", results[0].getName());
     }
+
+    @Test
+    void getEmployeeById() {
+        int id = 1;
+        // Act
+        EmployeeResponse result = testRestTemplate.getForObject("/employees/" + id, EmployeeResponse.class);
+        // Assert
+        assertEquals(id, result.getId());
+        assertEquals("Nattawat", result.getName());
+    }
+
 }
