@@ -12,22 +12,23 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/employees/{id}")
-    public Employee getEmployeeById(@PathVariable String id) {
+    public EmployeeResponse getEmployeeById(@PathVariable String id) {
 //       Validate input
 //       Claening data
-        Employee response
+        // Success
+        EmployeeResponse response
                 = employeeService.getById(Integer.parseInt(id));
         return response;
     }
 
     @GetMapping("/employees")
-    public Employee[] listEmployee() {
-        Employee employee01 = new Employee();
+    public EmployeeResponse[] listEmployee() {
+        EmployeeResponse employee01 = new EmployeeResponse();
         employee01.setId(1);
-        employee01.setName("atiruj");
-        Employee employee02 = new Employee();
+        employee01.setName("Atiruj");
+        EmployeeResponse employee02 = new EmployeeResponse();
         employee02.setId(2);
-        employee02.setName("atiruj 2");
-        return new Employee[]{employee01, employee02};
+        employee02.setName("Atiruj 2");
+        return new EmployeeResponse[]{employee01, employee02};
     }
 }
