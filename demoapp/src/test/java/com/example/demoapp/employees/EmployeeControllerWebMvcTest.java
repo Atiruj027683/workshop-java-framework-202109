@@ -27,7 +27,7 @@ public class EmployeeControllerWebMvcTest {
         // Response body
         byte[] json = result.getResponse().getContentAsByteArray();
         ObjectMapper mapper = new ObjectMapper();
-        EmployeeResponse response = mapper.readValue(json, EmployeeResponse.class);
+        EmployeeService response = mapper.readValue(json, EmployeeService.class);
         // Assert
         assertEquals(id, response.getId());
         assertEquals("somkiat", response.getName());
